@@ -6,3 +6,10 @@ Language: Go
 
 Task 1: Create a basic http methods for movies information.
 
+
+Things to DO:
+
+Validation
+Middleware
+Authentication
+Tests
