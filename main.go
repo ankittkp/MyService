@@ -1,14 +1,30 @@
 package main
 
 import (
-	"log"
 	"net/http"
+	"os"
+	"path"
+	"runtime"
+	"strconv"
 
 	"github.com/gorilla/mux"
+	log "github.com/sirupsen/logrus"
 
 	"MyService/auth"
 	"MyService/handlers"
 )
+
+func init() {
+	log.SetReportCaller(true)
+	log.SetFormatter(&log.JSONFormatter{
+		CallerPrettyfier: func(frame *runtime.Frame) (function string, file string) {
+			fileName := path.Base(frame.File) + ":" + strconv.Itoa(frame.Line)
+			return "", fileName
+		},
+	})
+	log.SetOutput(os.Stdout)
+	log.SetLevel(log.InfoLevel)
+}
 
 func main() {
 	router := mux.NewRouter()

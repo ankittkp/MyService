@@ -3,13 +3,13 @@ package handlers
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"strconv"
 	"strings"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
+	log "github.com/sirupsen/logrus"
 
 	"MyService/models"
 )
