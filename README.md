@@ -54,4 +54,26 @@ curl -X GET http://localhost:8080/health
 
 Port forward is a way to test the service locally, but in production, you would want to expose the pod using services.
 
+Write the k8s service:
+```sh
+kubectl apply -f k8s-deployment.yaml
+minikube service my-service --url
+```
 
+- Steps to scale a kubernetes deployment (Move to Top)
+```sh
+kubectl scale --replicas=4 deployment/my-service
+```
+
+```sh
+- Delete a pod:
+kubectl delete pod <pod-name>
+- Delete a deployment:
+kubectl delete deployment <deployment-name>
+- Delete a service:
+kubectl delete service <service-name>
+
+- Stop and Delete the minikube cluster:
+minikube stop
+minikube delete
+```
