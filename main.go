@@ -29,7 +29,7 @@ func init() {
 func main() {
 	log.Println("Starting My Service")
 	router := mux.NewRouter()
-	router.HandleFunc("/", handlers.HealthCheck).Methods("GET")
+	router.HandleFunc("/health", handlers.HealthCheck).Methods("GET")
 	router.HandleFunc("/token", auth.CreateToken).Methods("POST")
 	router.HandleFunc("/api/v1/movies", auth.Middleware(handlers.GetAllMovies)).Methods("GET")
 	router.HandleFunc("/api/v1/movie/{id}", auth.Middleware(handlers.GetMovie)).Methods("GET")
