@@ -6,19 +6,9 @@ Language: Go
 
 Tasks: Create a basic http methods for movies information.
 Things to DO:
-Middleware
-Authentication
-Logging & Errors
-add metrics to the service with prometheus
-integrate grafana, argocd, and prometheus
-Database
-Validation
-Tests
+Middleware, Authentication, Loggings, Errors, add metrics, Integrate grafana, cicd, argocd, jaegar, prometheus, Database, Validation, Tests
 
--- deployment in a docker container --
-docker file to kubernetes cluster
-
-- Steps I performed to create docker container:
+-- Docker --
 ```sh
 - Build the image
 docker build -t jinxankit/my-service:latest .
