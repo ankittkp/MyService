@@ -5,8 +5,12 @@ Goals: To create my own service from scratch, will add all my learnings here.
 Language: Go
 
 Tasks: Create a basic http methods for movies information.
+
 Things to DO:
-Middleware, Authentication, Loggings, Errors, add metrics, Integrate grafana, cicd, argocd, jaegar, prometheus, Database, Validation, Tests
+Middleware, Authentication, Loggings, Errors, add metrics, Integrate grafana, cicd, argocd, jaegar, prometheus, Database, Validation, Testing(unit, integration), Readme update
+
+Major goal:
+Scale the service for millions requests, note the latency and many more
 
 -- Docker --
 ```sh
