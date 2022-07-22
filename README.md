@@ -9,7 +9,20 @@ Task 1: Create a basic http methods for movies information.
 
 Things to DO:
 
-Validation
+
 Middleware
 Authentication
+Logging & Errors
+
+-- deployment in a docker container --
+docker file to kubernetes cluster
+
+add metrics to the service with prometheus
+integrate grafana, argocd, and prometheus
+
+-- deployment in a kubernetes cluster --
+
+
+Database
+Validation
 Tests

@@ -27,6 +27,7 @@ func init() {
 }
 
 func main() {
+	log.Println("Starting My Service")
 	router := mux.NewRouter()
 	router.HandleFunc("/", handlers.HealthCheck).Methods("GET")
 	router.HandleFunc("/token", auth.CreateToken).Methods("POST")
