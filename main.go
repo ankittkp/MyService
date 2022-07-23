@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
 
 	"MyService/auth"
@@ -29,6 +30,8 @@ func init() {
 func main() {
 	log.Println("Starting My Service")
 	router := mux.NewRouter()
+	m := auth.NewMetricsMiddleware()
+	router.Handle("/metrics", promhttp.Handler())
 	router.HandleFunc("/health", handlers.HealthCheck).Methods("GET")
 	router.HandleFunc("/token", auth.CreateToken).Methods("POST")
 	router.HandleFunc("/api/v1/movies", auth.Middleware(handlers.GetAllMovies)).Methods("GET")
@@ -40,5 +43,6 @@ func main() {
 	router.HandleFunc("/api/v1/movie/{id}", auth.Middleware(handlers.DeleteMovie())).Methods("DELETE")
 	router.HandleFunc("/api/v1/movies/batch", auth.Middleware(handlers.DeleteMoviesInBatch())).Methods("DELETE")
 	router.HandleFunc("/api/v1/movies/search", auth.Middleware(handlers.SearchMovies())).Queries("t", "{t}").Queries("y", "{y}").Queries("d", "{d}").Queries("i", "{i}").Queries("g", "{g}").Methods("GET")
+	router.Use(m.Metrics)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

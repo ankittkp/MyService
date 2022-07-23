@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/golang-jwt/jwt"
-	"github.com/gorilla/context"
 
 	"MyService/models"
 )
@@ -34,43 +33,5 @@ func CreateToken(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
-	}
-}
-
-func Middleware(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		authorisationHeader := r.Header.Get("authorization")
-		if authorisationHeader != "" {
-			token, err := jwt.Parse(authorisationHeader, func(token *jwt.Token) (interface{}, error) {
-				if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-					return nil, fmt.Errorf("there was an error")
-				}
-				return []byte("secret"), nil
-			})
-			if err != nil {
-				err := json.NewEncoder(w).Encode(Exception{Message: error.Error(err)})
-				if err != nil {
-					http.Error(w, err.Error(), http.StatusInternalServerError)
-					return
-				}
-				return
-			}
-			if token.Valid {
-				context.Set(r, "decoded", token.Claims)
-				next(w, r)
-			} else {
-				err := json.NewEncoder(w).Encode(Exception{Message: "Invalid authorization token"})
-				if err != nil {
-					http.Error(w, err.Error(), http.StatusInternalServerError)
-					return
-				}
-			}
-		} else {
-			err := json.NewEncoder(w).Encode(Exception{Message: "An authorization header is required"})
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusInternalServerError)
-				return
-			}
-		}
 	}
 }
