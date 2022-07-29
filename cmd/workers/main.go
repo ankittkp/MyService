@@ -11,9 +11,7 @@ const (
 
 func main() {
 	ch := make(chan string)
-
 	go CloseWorkersChannel(ch)
-
 	for i := 0; i < NoOfWorkers; i++ {
 		Wg.Add(1)
 		go worker(i, NoOfJobsPerWorker, ch)
