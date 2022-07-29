@@ -5,7 +5,7 @@ volumes:
 services:
   prometheus:
     restart: always
-    image: prom/prometheus:v2.6.1
+    image: prom/prometheus:latest
     container_name: prometheus
     volumes:
       - ./prometheus/:/etc/prometheus/
@@ -27,7 +27,7 @@ services:
     ports:
       - 8080:8080
   grafana:
-    image: grafana/grafana:5.4.3
+    image: grafana/grafana:latest
     container_name: grafana
     hostname: grafana
     ports:
