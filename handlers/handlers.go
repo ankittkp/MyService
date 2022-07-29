@@ -17,7 +17,9 @@ import (
 func HealthCheck(w http.ResponseWriter, r *http.Request) {
 	_, err := w.Write([]byte("Welcome to My Service, Author: Ankit Kumar!"))
 	if err != nil {
-		log.Println(err)
+		log.Println("Error in writing to response writer")
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		w.WriteHeader(http.StatusInternalServerError)
 	}
 	w.WriteHeader(http.StatusOK)
 }
