@@ -20,8 +20,6 @@ services:
       - "9090"
     ports:
       - 9090:9090
-    networks:
-      - basic
     depends_on:
       - my_service
   my-service:
@@ -34,7 +32,5 @@ services:
     hostname: grafana
     ports:
       - 3000:3000
-    networks:
-      - basic
     depends_on:
       - prometheus
