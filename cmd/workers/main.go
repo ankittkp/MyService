@@ -5,16 +5,17 @@ import (
 )
 
 const (
-	NoOfWorkers       = 100
-	NoOfJobsPerWorker = 100000
+	NoOfWorkers       = 1000
+	NoOfJobsPerWorker = 1000000
 )
 
 func main() {
 	ch := make(chan string)
-	Wg.Add(NoOfWorkers)
+
 	go CloseWorkersChannel(ch)
 
 	for i := 0; i < NoOfWorkers; i++ {
+		Wg.Add(1)
 		go worker(i, NoOfJobsPerWorker, ch)
 	}
 	for message := range ch {
